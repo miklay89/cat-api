@@ -22,7 +22,7 @@ const ImageComponent: FC = () => {
         }
         // add vote info
         if (voteData.map((vd) => vd.image_id).includes(d.id)) {
-          const vote = voteData.filter((vd) => vd.image_id === d.id).pop()
+          const vote = voteData.filter((vd) => vd.image_id === d.id).pop();
           d.vote_id = vote?.id!;
           d.value = vote?.value!;
         } else {
@@ -51,7 +51,7 @@ const ImageComponent: FC = () => {
       }
       // add vote info
       if (voteData.map((vd) => vd.image_id).includes(d.id)) {
-        const vote = voteData.filter((vd) => vd.image_id === d.id).pop()
+        const vote = voteData.filter((vd) => vd.image_id === d.id).pop();
         d.vote_id = vote?.id!;
         d.value = vote?.value!;
       } else {
@@ -92,6 +92,17 @@ const ImageComponent: FC = () => {
 
   return (
     <>
+      <div
+        style={{
+          display: items.length ? "none" : "block",
+          textAlign: "center",
+          fontSize: "20px",
+          color: "gray",
+          margin: "50px"
+        }}
+      >
+        Loading...
+      </div>
       <div
         style={{
           display: "flex",
