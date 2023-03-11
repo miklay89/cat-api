@@ -25,7 +25,7 @@ const UploadComponent: FC = () => {
 
   useEffect(() => {
     if (status) {
-      navigate("/");
+      setTimeout(() => {navigate("/")}, 5000)
     }
   }, [status, navigate]);
 
@@ -52,6 +52,15 @@ const UploadComponent: FC = () => {
           }}
         >
           Uploading error (something went wrong or image isn't a cat), please try again.
+        </div>
+        <div
+          style={{
+            display: typeof status == "boolean" && status ? "block" : "none",
+            color: "green",
+            textAlign: "center", marginTop: "30px"
+          }}
+        >
+          Upload complete. You will be redirect to home page in 5 seconds.
         </div>
       </Uploady>
     </div>
