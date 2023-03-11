@@ -14,15 +14,15 @@ const FavButtonComponent: FC<Props> = (props: Props) => {
 
   const setFavHandler = async (e: React.MouseEvent) => {
     e.preventDefault();
+    setStatus(true);
     const res = await API.setFavourite(imgId);
     setFavId(res.id);
-    setStatus(true);
   };
 
   const deleteFavHandler = async (e: React.MouseEvent) => {
     e.preventDefault();
-    API.deleteFavourite(favId);
     setStatus(false);
+    API.deleteFavourite(favId);
   };
 
   return (
