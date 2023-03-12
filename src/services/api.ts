@@ -8,7 +8,7 @@ import {
 } from "../interfaces/interfaces";
 const baseUrl = "https://api.thecatapi.com/v1";
 const API_KEY =
-  "live_etGJgtQvWmkQwtK2EbLA11QcEyr9mF1PXzQL6wLY3b6fcyicl22tqINcHTxR0Wnx";
+  "live_mzte9TLRDZcXLVjdoiDBB3k0iXDzQf3rZPa5W4tEzKOkhk8WGIhfVjpin3KD1yjD";
 const LIMIT = 6;
 const SUB_ID = "my-user-1234";
 

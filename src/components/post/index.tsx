@@ -12,7 +12,7 @@ const Post: FC = () => {
   useEffect(() => {
     async function getImages() {
       const imagesData = await API.getImages(0);
-      setImages([...(images || []), ...imagesData]);
+      setImages(imagesData);
     }
     if (!images) getImages();
   }, [images]);
@@ -96,8 +96,8 @@ const Post: FC = () => {
             maxWidth: "300px",
             borderRadius: "10px",
             padding: "3px",
-            display: "block",
             margin: "0 auto",
+            display: images.length? "block" : "none",
           }}
         >
           Get more cats

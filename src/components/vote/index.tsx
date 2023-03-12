@@ -14,8 +14,11 @@ const VoteComponent: FC<Props> = (props: Props) => {
   useEffect(() => {
     function checkVotes() {
       setVotes(props.votes);
-      const filteredVotes = props.votes.filter((v) => v.image_id === props.imageId);
-      
+      console.log(props.votes);
+      const filteredVotes = props.votes.filter(
+        (v) => v.image_id === props.imageId
+      );
+
       const score = filteredVotes
         .map((fv) => fv.value)
         .reduce((acc, next) => acc + next, 0);
@@ -28,13 +31,13 @@ const VoteComponent: FC<Props> = (props: Props) => {
   const voteUpHandler = async (e: MouseEvent) => {
     e.preventDefault();
     setVoteScore(voteScore! + 1);
-    await API.setVote(props.imageId, 1);
+    await API.setVote(props.imageId, voteScore! + 1);
   };
 
   const voteDownHandler = async (e: MouseEvent) => {
     e.preventDefault();
     setVoteScore(voteScore! - 1);
-    await API.setVote(props.imageId, -1);
+    await API.setVote(props.imageId, voteScore! - 1);
   };
 
   return (
