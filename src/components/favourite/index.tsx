@@ -13,7 +13,7 @@ const Favourite: FC<Props> = (props: Props) => {
 
   useEffect(() => {
     function checkStatus() {
-      if(!props.favorites.length) return;
+      if (!props.favorites.length) return;
       const [favorite] = props.favorites.filter(
         (f) => f.image_id === props.imageId
       );
@@ -31,7 +31,7 @@ const Favourite: FC<Props> = (props: Props) => {
     e.preventDefault();
     setStatus(true);
     const res = await API.setFavourite(props.imageId);
-    setFavId(res.id);
+    if (res) setFavId(res.id);
   };
 
   const deleteFavHandler = async (e: React.MouseEvent) => {

@@ -12,7 +12,7 @@ const Post: FC = () => {
   useEffect(() => {
     async function getImages() {
       const imagesData = await API.getImages(0);
-      setImages(imagesData);
+      if (imagesData) setImages(imagesData);
     }
     if (!images) getImages();
   }, [images]);
@@ -20,7 +20,7 @@ const Post: FC = () => {
   useEffect(() => {
     async function getFavourites() {
       const favouriteData = await API.getFavourites();
-      setFavorites(favouriteData);
+      if (favouriteData) setFavorites(favouriteData);
     }
     if (!favorites) getFavourites();
   }, [favorites]);
@@ -28,7 +28,7 @@ const Post: FC = () => {
   useEffect(() => {
     async function getVotes() {
       const votesData = await API.getVotes();
-      setVotes(votesData);
+      if (votesData) setVotes(votesData);
     }
     if (!votes) getVotes();
   }, [votes]);
@@ -37,7 +37,7 @@ const Post: FC = () => {
     e.preventDefault();
     if (!images) return;
     const imagesData = await API.getImages(images.length / 6);
-    setImages([...images, ...imagesData]);
+    if (imagesData) setImages([...images, ...imagesData]);
   };
 
   if (!images) {
