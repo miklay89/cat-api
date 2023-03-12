@@ -1,21 +1,37 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
+import { Favorite } from "../../interfaces/interfaces";
 import API from "../../services/api";
 
 interface Props {
-  fav_id: string;
-  isFav: boolean;
-  img_id: string;
+  imageId: string;
+  favorites: Favorite[];
 }
 
-const FavButtonComponent: FC<Props> = (props: Props) => {
-  const [status, setStatus] = useState<boolean>(props.isFav);
-  const [favId, setFavId] = useState<string>(props.fav_id);
-  const [imgId, setImgId] = useState<string>(props.img_id);
+const Favourite: FC<Props> = (props: Props) => {
+  const [favId, setFavId] = useState<number>(0);
+  const [status, setStatus] = useState<boolean | undefined>(undefined);
+
+  useEffect(() => {
+    function checkStatus() {
+      if(!props.favorites.length) return;
+      const [favorite] = props.favorites.filter(
+        (f) => f.image_id === props.imageId
+      );
+      console.log(favorite);
+      if (!favorite) {
+        setStatus(false);
+      } else {
+        setStatus(true);
+        setFavId(favorite.id);
+      }
+    }
+    if (typeof status === "undefined") checkStatus();
+  }, [props.favorites, props.imageId, status]);
 
   const setFavHandler = async (e: React.MouseEvent) => {
     e.preventDefault();
     setStatus(true);
-    const res = await API.setFavourite(imgId);
+    const res = await API.setFavourite(props.imageId);
     setFavId(res.id);
   };
 
@@ -28,7 +44,7 @@ const FavButtonComponent: FC<Props> = (props: Props) => {
   return (
     <div>
       <button
-        id={favId}
+        id={String(favId)}
         onClick={deleteFavHandler}
         style={{
           width: "100%",
@@ -41,7 +57,7 @@ const FavButtonComponent: FC<Props> = (props: Props) => {
         Delete from favourite
       </button>
       <button
-        id={imgId}
+        id={props.imageId}
         onClick={setFavHandler}
         style={{
           width: "100%",
@@ -57,4 +73,4 @@ const FavButtonComponent: FC<Props> = (props: Props) => {
   );
 };
 
-export default FavButtonComponent;
+export default Favourite;

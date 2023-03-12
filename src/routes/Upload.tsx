@@ -1,5 +1,5 @@
 import { FC } from "react";
-import UploadyComponent from "../components/Uploady/Uploady";
+import UploadyComponent from "../components/upload";
 
 const UploadPage: FC = () => {
   return (

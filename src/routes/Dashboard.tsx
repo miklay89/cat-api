@@ -1,5 +1,5 @@
 import { FC } from "react";
-import ImageComponent from "../components/Image/Image";
+import PostComponent from "../components/post";
 
 const DashboardPage: FC = () => {
   return (
@@ -8,7 +8,7 @@ const DashboardPage: FC = () => {
         <h2 style={{textAlign: "center"}}>Dashboard of cats</h2>
       </div>
       <div>
-        <ImageComponent />
+        <PostComponent />
       </div>
     </div>
   );

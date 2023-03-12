@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Uploady from "@rpldy/uploady";
 import UploadButton from "@rpldy/upload-button";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const API_KEY =
   "live_etGJgtQvWmkQwtK2EbLA11QcEyr9mF1PXzQL6wLY3b6fcyicl22tqINcHTxR0Wnx";
 
-const UploadComponent: FC = () => {
+const Upload: FC = () => {
   // redirect if OK
   const navigate = useNavigate();
   // status of upload
@@ -67,4 +67,4 @@ const UploadComponent: FC = () => {
   );
 };
 
-export default UploadComponent;
+export default Upload;

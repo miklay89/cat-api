@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import NavbarData from "./NavbarData";
+import NavbarData from "./data";
 import { Link } from "react-router-dom";
 
 const Navbar: FC = () => {

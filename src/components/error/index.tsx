@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { isRouteErrorResponse, useRouteError } from "react-router-dom";
 
-const ErrorBoundary: FC = () => {
+const Error: FC = () => {
   const error = useRouteError();
   if (isRouteErrorResponse(error)) {
     return (
@@ -17,4 +17,4 @@ const ErrorBoundary: FC = () => {
   }
 };
 
-export default ErrorBoundary;
+export default Error;
