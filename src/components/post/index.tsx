@@ -40,7 +40,7 @@ const Post: FC = () => {
     setImages([...images, ...imagesData]);
   };
 
-  if (!images)
+  if (!images) {
     return (
       <div
         style={{
@@ -51,9 +51,10 @@ const Post: FC = () => {
           margin: "50px",
         }}
       >
-        No images yet...
+        Loading...
       </div>
     );
+  }
 
   const items = images.map((image) => {
     return (
@@ -79,6 +80,17 @@ const Post: FC = () => {
     <>
       <div
         style={{
+          display: images.length === 0 ? "block" : "none",
+          textAlign: "center",
+          fontSize: "20px",
+          color: "gray",
+          margin: "50px",
+        }}
+      >
+        No cats yet...
+      </div>
+      <div
+        style={{
           display: "flex",
           width: "100%",
           flexDirection: "row",
@@ -97,7 +109,7 @@ const Post: FC = () => {
             borderRadius: "10px",
             padding: "3px",
             margin: "0 auto",
-            display: images.length? "block" : "none",
+            display: images.length ? "block" : "none",
           }}
         >
           Get more cats
