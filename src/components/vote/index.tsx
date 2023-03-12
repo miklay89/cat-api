@@ -13,8 +13,8 @@ const VoteComponent: FC<Props> = (props: Props) => {
 
   useEffect(() => {
     function checkVotes() {
+      if(!props.votes.length) return;
       setVotes(props.votes);
-      console.log(props.votes);
       const filteredVotes = props.votes.filter(
         (v) => v.image_id === props.imageId
       );

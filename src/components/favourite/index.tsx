@@ -17,7 +17,6 @@ const Favourite: FC<Props> = (props: Props) => {
       const [favorite] = props.favorites.filter(
         (f) => f.image_id === props.imageId
       );
-      console.log(favorite);
       if (!favorite) {
         setStatus(false);
       } else {
