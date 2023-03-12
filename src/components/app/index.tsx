@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Error from "../error";
-import HomePage from "../../routes/home";
-import UploadPage from "../../routes/upload";
-import DashboardPage from "../../routes/dashboard";
+import HomePage from "../../routes/Home";
+import UploadPage from "../../routes/Upload";
+import DashboardPage from "../../routes/Dashboard";
 import Navbar from "../navbar";
 
 const AppLayout: FC = () => {
