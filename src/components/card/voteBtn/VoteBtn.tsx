@@ -9,21 +9,13 @@ interface Props {
 }
 
 const VoteComponent: FC<Props> = (props: Props) => {
-  const [votes, setVotes] = useState<Vote[]>([]);
-  const [voteScore, setVoteScore] = useState<number>();
-
-  useEffect(() => {
-    setVotes(props.votes);
-    const filteredVotes = props.votes.filter(
-      (v) => v.image_id === props.imageId
-    );
-
-    const score = filteredVotes
-      .map((fv) => fv.value)
-      .reduce((acc, next) => acc + next, 0);
-
-    setVoteScore(score);
-  }, [props.imageId, props.votes, votes]);
+  const [votes, setVotes] = useState<Vote[]>(props.votes);
+  
+  const score = props.votes
+    .filter((v) => v.image_id === props.imageId)
+    .map((d) => d.value)
+    .reduce((acc, next) => acc + next, 0);
+  const [voteScore, setVoteScore] = useState<number>(score);
 
   const voteUpHandler = async (e: MouseEvent) => {
     e.preventDefault();

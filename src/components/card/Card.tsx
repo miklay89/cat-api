@@ -55,8 +55,8 @@ const Post: FC<Props> = (props) => {
         <div>
           <img className="photo" src={image.url} alt={image.id} />
         </div>
-        <FavouriteButton imageId={image.id} favorites={favorites || []} />
-        <VoteComponent imageId={image.id} votes={votes || []} />
+        <FavouriteButton imageId={image.id} favorites={favorites} />
+        <VoteComponent imageId={image.id} votes={votes} />
       </div>
     );
   });
