@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { createBrowserRouter, Outlet } from "react-router-dom";
-import Navbar from "../components/navbar";
+import Navbar from "../components/navbar/Navbar";
 import DashboardPage from "../pages/Dashboard";
 import HomePage from "../pages/Home";
 import NoPage from "../pages/NoPage";

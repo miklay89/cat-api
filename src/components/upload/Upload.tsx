@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import Uploady from "@rpldy/uploady";
 import UploadButton from "@rpldy/upload-button";
 import { useNavigate } from "react-router-dom";
+import "./styles.css";
 
 const API_KEY =
   "live_mzte9TLRDZcXLVjdoiDBB3k0iXDzQf3rZPa5W4tEzKOkhk8WGIhfVjpin3KD1yjD";
@@ -25,13 +26,15 @@ const Upload: FC = () => {
 
   useEffect(() => {
     if (status) {
-      setTimeout(() => {navigate("/")}, 5000)
+      setTimeout(() => {
+        navigate("/");
+      }, 5000);
     }
   }, [status, navigate]);
 
-  const hideError = () => {
-    setStatus(undefined)
-  }
+  const hideErrorMessage = () => {
+    setStatus(undefined);
+  };
 
   return (
     <div>
@@ -43,22 +46,23 @@ const Upload: FC = () => {
         accept="image/*"
         isSuccessfulCall={customIsSuccess}
       >
-        <UploadButton onClick={hideError} />
+        <UploadButton onClick={hideErrorMessage} />
         <div
-          style={{
-            display: typeof status == "boolean" && !status ? "block" : "none",
-            color: "red",
-            textAlign: "center", marginTop: "30px"
-          }}
+          className={
+            typeof status === "boolean" && !status
+              ? "show fail center"
+              : "hidden"
+          }
         >
-          Uploading error (something went wrong or image isn't a cat), please try again.
+          Uploading error (something went wrong or image isn't a cat), please
+          try again.
         </div>
         <div
-          style={{
-            display: typeof status == "boolean" && status ? "block" : "none",
-            color: "green",
-            textAlign: "center", marginTop: "30px"
-          }}
+          className={
+            typeof status === "boolean" && status
+              ? "show success center"
+              : "hidden"
+          }
         >
           Upload complete. You will be redirect to home page in 5 seconds.
         </div>

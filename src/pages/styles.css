@@ -1,0 +1,13 @@
+.container {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.center {
+  text-align: center;
+}
+
+.descr {
+  padding: 10px;
+  text-align: justify;
+}

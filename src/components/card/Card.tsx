@@ -1,11 +1,12 @@
 import { FC, useEffect, useState, MouseEvent } from "react";
 import { Favorite, Image, Vote } from "../../interfaces/interfaces";
 import API from "../../services/api";
-import FavouriteButton from "../favourite";
-import VoteComponent from "../vote";
+import FavouriteButton from "./favouriteBtn/FavouriteBtn";
+import VoteComponent from "./voteBtn/VoteBtn";
+import "./styles.css";
 
 interface Props {
-  hasError: boolean
+  hasError: boolean;
 }
 
 const Post: FC<Props> = (props) => {
@@ -48,45 +49,24 @@ const Post: FC<Props> = (props) => {
     if (imagesData) setImages([...images, ...imagesData]);
   };
 
-  if (!images) {
-    return (
-      <div
-        style={{
-          display: "block",
-          textAlign: "center",
-          fontSize: "20px",
-          color: "gray",
-          margin: "50px",
-        }}
-      >
-        Loading...
-      </div>
-    );
+  if (hasError) {
+    return <div className="message center">Server error...</div>;
   }
 
-  if (hasError) {
-    return <div style={{
-      display: "block",
-      textAlign: "center",
-      fontSize: "20px",
-      color: "gray",
-      margin: "50px",
-    }}> Server error...</div>;
+  if (!images) {
+    return <div className="message center">Loading...</div>;
+  }
+
+  if (images.length === 0) {
+    return <div className="message center">No cats yet...</div>;
   }
 
   const items = images.map((image) => {
     return (
-      <div
-        key={image.id}
-        style={{ margin: "20px", border: "solid 1px", width: "350px" }}
-      >
-        <div style={{ textAlign: "center" }}>Cat...</div>
+      <div key={image.id} className="img_container">
+        <div className="center">Cat...</div>
         <div>
-          <img
-            src={image.url}
-            alt={image.id}
-            style={{ width: "100%", height: "250px", objectFit: "cover" }}
-          />
+          <img className="photo" src={image.url} alt={image.id} />
         </div>
         <FavouriteButton imageId={image.id} favorites={favorites || []} />
         <VoteComponent imageId={image.id} votes={votes || []} />
@@ -96,41 +76,14 @@ const Post: FC<Props> = (props) => {
 
   return (
     <>
-      <div
-        style={{
-          display: images.length === 0 ? "block" : "none",
-          textAlign: "center",
-          fontSize: "20px",
-          color: "gray",
-          margin: "50px",
-        }}
-      >
-        No cats yet...
-      </div>
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      >
-        {items}
-      </div>
+      <div className="dashboard_container">{items}</div>
 
       <div style={{ marginBottom: "30px" }}>
         <button
           onClick={clickHandler}
-          style={{
-            maxWidth: "300px",
-            borderRadius: "10px",
-            padding: "3px",
-            margin: "0 auto",
-            display: images.length ? "block" : "none",
-          }}
+          className={images.length ? "show get_more_btn" : "hidden"}
         >
-          Get more cats
+          Get more cats!
         </button>
       </div>
     </>

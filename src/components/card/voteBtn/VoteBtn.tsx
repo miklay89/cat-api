@@ -1,6 +1,7 @@
 import { FC, useEffect, useState, MouseEvent } from "react";
-import { Vote } from "../../interfaces/interfaces";
-import API from "../../services/api";
+import { Vote } from "../../../interfaces/interfaces";
+import API from "../../../services/api";
+import "./style.css";
 
 interface Props {
   imageId: string;
@@ -13,7 +14,7 @@ const VoteComponent: FC<Props> = (props: Props) => {
 
   useEffect(() => {
     function checkVotes() {
-      if(!props.votes.length) return;
+      if (!props.votes.length) return;
       setVotes(props.votes);
       const filteredVotes = props.votes.filter(
         (v) => v.image_id === props.imageId
@@ -42,22 +43,14 @@ const VoteComponent: FC<Props> = (props: Props) => {
 
   return (
     <div>
-      <div
-        style={{ textAlign: "center", marginTop: "5px", marginBottom: "5px" }}
-      >
+      <div className="score">
         <span>Vote score: </span>
         <span>{voteScore}</span>
       </div>
-      <button
-        onClick={voteUpHandler}
-        style={{ width: "50%", borderRadius: "10px", padding: "3px" }}
-      >
+      <button onClick={voteUpHandler} className="vote_btn">
         Vote up
       </button>
-      <button
-        onClick={voteDownHandler}
-        style={{ width: "50%", borderRadius: "10px", padding: "3px" }}
-      >
+      <button onClick={voteDownHandler} className="vote_btn">
         Vote down
       </button>
     </div>

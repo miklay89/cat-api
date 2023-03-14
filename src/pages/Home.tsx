@@ -1,11 +1,12 @@
 import { FC } from "react";
+import "./styles.css";
 
 const HomePage: FC = () => {
   return (
     <div>
-      <div style={{ margin: "0 auto", maxWidth: "900px" }}>
-        <h2 style={{ textAlign: "center" }}>Home</h2>
-        <div style={{ padding: "10px" }}>
+      <div className="container">
+        <h2 className="center">Home</h2>
+        <div className="descr">
           <p>Material from - <a href="https://en.wikipedia.org/wiki/Cat">https://en.wikipedia.org/wiki/Cat</a></p>
           <p>API from - <a href="https://api.thecatapi.com">https://api.thecatapi.com</a></p>
           <p>

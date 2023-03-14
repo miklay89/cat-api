@@ -1,15 +1,16 @@
 import { FC } from "react";
-import ErrorBoundary from "../components/error";
-import PostComponent from "../components/post";
+import ErrorBoundary from "../components/errorBoundary/ErrorBoundary";
+import PostComponent from "../components/card/Card";
+import "./styles.css";
 
 const DashboardPage: FC = () => {
   return (
     <div>
-      <div style={{ margin: "0 auto" }}>
-        <h2 style={{ textAlign: "center" }}>Dashboard of cats</h2>
+      <div className="container">
+        <h2 className="center">Dashboard of cats</h2>
       </div>
       <div>
-        <ErrorBoundary >
+        <ErrorBoundary>
           <PostComponent hasError={false} />
         </ErrorBoundary>
       </div>

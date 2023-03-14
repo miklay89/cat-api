@@ -1,0 +1,10 @@
+.score {
+  text-align: center;
+  margin: 0px;
+}
+
+.vote_btn {
+  width: 50%;
+  border-radius: 10px;
+  padding: 3px;
+}

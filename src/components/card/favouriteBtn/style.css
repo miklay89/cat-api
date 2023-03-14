@@ -1,0 +1,21 @@
+.unfav_btn {
+  width: 100%;
+  border-radius: 10px;
+  padding: 3px;
+  background-color: #db7d7d;
+}
+
+.fav_btn {
+  width: 100%;
+  border-radius: 10px;
+  padding: 3px;
+  background-color: #7ddb8a;
+}
+
+.show {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}

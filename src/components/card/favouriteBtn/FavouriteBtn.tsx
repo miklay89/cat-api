@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
-import { Favorite } from "../../interfaces/interfaces";
-import API from "../../services/api";
+import { Favorite } from "../../../interfaces/interfaces";
+import API from "../../../services/api";
+import "./style.css";
 
 interface Props {
   imageId: string;
@@ -45,26 +46,14 @@ const Favourite: FC<Props> = (props: Props) => {
       <button
         id={String(favId)}
         onClick={deleteFavHandler}
-        style={{
-          width: "100%",
-          borderRadius: "10px",
-          padding: "3px",
-          display: status ? "block" : "none",
-          backgroundColor: "#db7d7d",
-        }}
+        className={status ? "unfav_btn show" : "hidden"}
       >
         Delete from favourite
       </button>
       <button
         id={props.imageId}
         onClick={setFavHandler}
-        style={{
-          width: "100%",
-          borderRadius: "10px",
-          padding: "3px",
-          display: status ? "none" : "block",
-          backgroundColor: "#7ddb8a",
-        }}
+        className={!status ? "fav_btn show" : "hidden"}
       >
         Add to favourite
       </button>

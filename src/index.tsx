@@ -1,4 +1,4 @@
-import App from "./components/app";
+import App from "./components/app/App";
 import { createRoot } from 'react-dom/client';
 
 const domNode = document.getElementById('root') as HTMLElement;
