@@ -10,29 +10,22 @@ interface Props {
 
 const Favourite: FC<Props> = (props: Props) => {
   const [favId, setFavId] = useState<number>(0);
-  const [status, setStatus] = useState<boolean | undefined>(undefined);
+  const [status, setStatus] = useState<boolean>(false);
 
   useEffect(() => {
-    function checkStatus() {
-      if (!props.favorites.length) return;
-      const [favorite] = props.favorites.filter(
-        (f) => f.image_id === props.imageId
-      );
-      if (!favorite) {
-        setStatus(false);
-      } else {
-        setStatus(true);
-        setFavId(favorite.id);
-      }
+    const [favorite] = props.favorites.filter(
+      (f) => f.image_id === props.imageId
+    );
+    if (favorite) {
+      setStatus(true);
+      setFavId(favorite.id);
     }
-    if (typeof status === "undefined") checkStatus();
-  }, [props.favorites, props.imageId, status]);
+  }, [props.favorites, props.imageId]);
 
   const setFavHandler = async (e: React.MouseEvent) => {
     e.preventDefault();
     setStatus(true);
-    const res = await API.setFavourite(props.imageId);
-    if (res) setFavId(res.id);
+    API.setFavourite(props.imageId).then((res) => setFavId(res.id));
   };
 
   const deleteFavHandler = async (e: React.MouseEvent) => {

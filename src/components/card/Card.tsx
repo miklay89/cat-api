@@ -10,55 +10,42 @@ interface Props {
 }
 
 const Post: FC<Props> = (props) => {
-  const [images, setImages] = useState<Image[] | undefined>(undefined);
-  const [favorites, setFavorites] = useState<Favorite[] | undefined>(undefined);
-  const [votes, setVotes] = useState<Vote[] | undefined>(undefined);
+  const [images, setImages] = useState<Image[]>([]);
+  const [favorites, setFavorites] = useState<Favorite[]>([]);
+  const [votes, setVotes] = useState<Vote[]>([]);
   const [hasError, setHasError] = useState<boolean>(props.hasError);
 
   useEffect(() => {
-    async function getImages() {
-      const imagesData = await API.getImages(0);
-      if (imagesData) return setImages(imagesData);
-      return setHasError(true);
-    }
-    if (!images) getImages();
-  }, [images]);
+    API.getImages(0)
+      .then((res) => setImages(res))
+      .catch(() => setHasError(true));
+  }, []);
 
   useEffect(() => {
-    async function getFavourites() {
-      const favouriteData = await API.getFavourites();
-      if (favouriteData) return setFavorites(favouriteData);
-      return setHasError(true);
-    }
-    if (!favorites) getFavourites();
-  }, [favorites]);
+    API.getFavourites()
+      .then((res) => setFavorites(res))
+      .catch(() => setHasError(true));
+  }, []);
 
   useEffect(() => {
-    async function getVotes() {
-      const votesData = await API.getVotes();
-      if (votesData) return setVotes(votesData);
-      return setHasError(true);
-    }
-    if (!votes) getVotes();
-  }, [votes]);
+    API.getVotes()
+      .then((res) => setVotes(res))
+      .catch(() => setHasError(true));
+  }, []);
 
   const clickHandler = async (e: MouseEvent) => {
     e.preventDefault();
-    if (!images) return;
-    const imagesData = await API.getImages(images.length / 6);
-    if (imagesData) setImages([...images, ...imagesData]);
+    API.getImages(images.length / 6)
+      .then((res) => setImages([...images, ...res]))
+      .catch(() => setHasError(true));
   };
 
   if (hasError) {
     return <div className="message center">Server error...</div>;
   }
 
-  if (!images) {
-    return <div className="message center">Loading...</div>;
-  }
-
   if (images.length === 0) {
-    return <div className="message center">No cats yet...</div>;
+    return <div className="message center">Loading...</div>;
   }
 
   const items = images.map((image) => {
@@ -76,7 +63,9 @@ const Post: FC<Props> = (props) => {
 
   return (
     <>
-      <div className="dashboard_container">{items}</div>
+      <div className="dashboard_container">
+        {items.length > 0 ? items : "No cats yet..."}
+      </div>
       <div className="footer">
         <button
           onClick={clickHandler}

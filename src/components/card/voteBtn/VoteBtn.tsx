@@ -9,25 +9,21 @@ interface Props {
 }
 
 const VoteComponent: FC<Props> = (props: Props) => {
-  const [votes, setVotes] = useState<Vote[] | undefined>(undefined);
+  const [votes, setVotes] = useState<Vote[]>([]);
   const [voteScore, setVoteScore] = useState<number>();
 
   useEffect(() => {
-    function checkVotes() {
-      if (!props.votes.length) return;
-      setVotes(props.votes);
-      const filteredVotes = props.votes.filter(
-        (v) => v.image_id === props.imageId
-      );
+    setVotes(props.votes);
+    const filteredVotes = props.votes.filter(
+      (v) => v.image_id === props.imageId
+    );
 
-      const score = filteredVotes
-        .map((fv) => fv.value)
-        .reduce((acc, next) => acc + next, 0);
+    const score = filteredVotes
+      .map((fv) => fv.value)
+      .reduce((acc, next) => acc + next, 0);
 
-      setVoteScore(score);
-    }
-    if (typeof votes === "undefined") checkVotes();
-  }, [props.imageId, props.votes, voteScore, votes]);
+    setVoteScore(score);
+  }, [props.imageId, props.votes, votes]);
 
   const voteUpHandler = async (e: MouseEvent) => {
     e.preventDefault();
