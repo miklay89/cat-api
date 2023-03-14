@@ -9,18 +9,12 @@ interface Props {
 }
 
 const Favourite: FC<Props> = (props: Props) => {
-  const [favId, setFavId] = useState<number>(0);
-  const [status, setStatus] = useState<boolean>(false);
+  const [favorite] = props.favorites.filter(
+    (f) => f.image_id === props.imageId
+  );
 
-  useEffect(() => {
-    const [favorite] = props.favorites.filter(
-      (f) => f.image_id === props.imageId
-    );
-    if (favorite) {
-      setStatus(true);
-      setFavId(favorite.id);
-    }
-  }, [props.favorites, props.imageId]);
+  const [favId, setFavId] = useState<number>(favorite ? favorite.id : 0);
+  const [status, setStatus] = useState<boolean>(favorite ? true : false);
 
   const setFavHandler = async (e: React.MouseEvent) => {
     e.preventDefault();
