@@ -8,11 +8,13 @@ const Post: FC = () => {
   const [images, setImages] = useState<Image[] | undefined>(undefined);
   const [favorites, setFavorites] = useState<Favorite[] | undefined>(undefined);
   const [votes, setVotes] = useState<Vote[] | undefined>(undefined);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
     async function getImages() {
       const imagesData = await API.getImages(0);
-      if (imagesData) setImages(imagesData);
+      if (imagesData) return setImages(imagesData);
+      return setHasError(true);
     }
     if (!images) getImages();
   }, [images]);
@@ -20,7 +22,8 @@ const Post: FC = () => {
   useEffect(() => {
     async function getFavourites() {
       const favouriteData = await API.getFavourites();
-      if (favouriteData) setFavorites(favouriteData);
+      if (favouriteData) return setFavorites(favouriteData);
+      return setHasError(true);
     }
     if (!favorites) getFavourites();
   }, [favorites]);
@@ -28,7 +31,8 @@ const Post: FC = () => {
   useEffect(() => {
     async function getVotes() {
       const votesData = await API.getVotes();
-      if (votesData) setVotes(votesData);
+      if (votesData) return setVotes(votesData);
+      return setHasError(true);
     }
     if (!votes) getVotes();
   }, [votes]);
@@ -54,6 +58,16 @@ const Post: FC = () => {
         Loading...
       </div>
     );
+  }
+
+  if (hasError) {
+    return <div style={{
+      display: "block",
+      textAlign: "center",
+      fontSize: "20px",
+      color: "gray",
+      margin: "50px",
+    }}> Server error...</div>;
   }
 
   const items = images.map((image) => {
