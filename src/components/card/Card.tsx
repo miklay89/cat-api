@@ -77,8 +77,7 @@ const Post: FC<Props> = (props) => {
   return (
     <>
       <div className="dashboard_container">{items}</div>
-
-      <div style={{ marginBottom: "30px" }}>
+      <div className="footer">
         <button
           onClick={clickHandler}
           className={images.length ? "show get_more_btn" : "hidden"}
