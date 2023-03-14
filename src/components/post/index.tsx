@@ -4,11 +4,15 @@ import API from "../../services/api";
 import FavouriteButton from "../favourite";
 import VoteComponent from "../vote";
 
-const Post: FC = () => {
+interface Props {
+  hasError: boolean
+}
+
+const Post: FC<Props> = (props) => {
   const [images, setImages] = useState<Image[] | undefined>(undefined);
   const [favorites, setFavorites] = useState<Favorite[] | undefined>(undefined);
   const [votes, setVotes] = useState<Vote[] | undefined>(undefined);
-  const [hasError, setHasError] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(props.hasError);
 
   useEffect(() => {
     async function getImages() {

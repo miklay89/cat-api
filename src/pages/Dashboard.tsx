@@ -10,7 +10,7 @@ const DashboardPage: FC = () => {
       </div>
       <div>
         <ErrorBoundary >
-          <PostComponent />
+          <PostComponent hasError={false} />
         </ErrorBoundary>
       </div>
     </div>
