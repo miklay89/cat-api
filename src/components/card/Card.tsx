@@ -10,6 +10,7 @@ interface Props {
 }
 
 const Post: FC<Props> = (props) => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [images, setImages] = useState<Image[]>([]);
   const [favorites, setFavorites] = useState<Favorite[]>([]);
   const [votes, setVotes] = useState<Vote[]>([]);
@@ -17,7 +18,9 @@ const Post: FC<Props> = (props) => {
 
   useEffect(() => {
     API.getImages(0)
-      .then((res) => setImages(res))
+      .then((res) => {
+        setLoading(false);
+        setImages(res)})
       .catch(() => setHasError(true));
   }, []);
 
@@ -44,10 +47,6 @@ const Post: FC<Props> = (props) => {
     return <div className="message center">Server error...</div>;
   }
 
-  if (images.length === 0) {
-    return <div className="message center">Loading...</div>;
-  }
-
   const items = images.map((image) => {
     return (
       <div key={image.id} className="img_container">
@@ -64,7 +63,8 @@ const Post: FC<Props> = (props) => {
   return (
     <>
       <div className="dashboard_container">
-        {items.length > 0 ? items : "No cats yet..."}
+        <div className={loading ? "show message center" : "hidden"}>Loading...</div>
+        {items}
       </div>
       <div className="footer">
         <button
