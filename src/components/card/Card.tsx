@@ -5,6 +5,8 @@ import FavouriteButton from "./favouriteBtn/FavouriteBtn";
 import VoteComponent from "./voteBtn/VoteBtn";
 import "./styles.css";
 
+const LIMIT = process.env.REACT_APP_LIMIT;
+
 interface Props {
   hasError: boolean;
 }
@@ -39,7 +41,7 @@ const Post: FC<Props> = (props) => {
 
   const clickHandler = async (e: MouseEvent) => {
     e.preventDefault();
-    API.getImages(images.length / 6)
+    API.getImages(images.length / LIMIT)
       .then((res) => setImages([...images, ...res]))
       .catch(() => setHasError(true));
   };
