@@ -20,7 +20,8 @@ const Post: FC<Props> = (props) => {
     API.getImages(0)
       .then((res) => {
         setLoading(false);
-        setImages(res)})
+        setImages(res);
+      })
       .catch(() => setHasError(true));
   }, []);
 
@@ -63,7 +64,16 @@ const Post: FC<Props> = (props) => {
   return (
     <>
       <div className="dashboard_container">
-        <div className={loading ? "show message center" : "hidden"}>Loading...</div>
+        <div className={loading ? "show message center" : "hidden"}>
+          Loading...
+        </div>
+        <div
+          className={
+            !loading && images.length === 0 ? "show message center" : "hidden"
+          }
+        >
+          No cats yet...
+        </div>
         {items}
       </div>
       <div className="footer">
