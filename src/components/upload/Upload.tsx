@@ -4,8 +4,9 @@ import UploadButton from "@rpldy/upload-button";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 
-const API_KEY =
-  "live_mzte9TLRDZcXLVjdoiDBB3k0iXDzQf3rZPa5W4tEzKOkhk8WGIhfVjpin3KD1yjD";
+const API_KEY = process.env.REACT_APP_API_KEY;
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 
 const Upload: FC = () => {
   // redirect if OK
@@ -40,7 +41,7 @@ const Upload: FC = () => {
     <div>
       <Uploady
         destination={{
-          url: "https://api.thecatapi.com/v1/images/upload",
+          url: `${baseUrl}/images/upload`,
           headers: { "x-api-key": API_KEY },
         }}
         accept="image/*"

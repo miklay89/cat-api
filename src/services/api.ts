@@ -6,11 +6,11 @@ import {
   SetFavourite,
   SetVote,
 } from "../interfaces/interfaces";
-const baseUrl = "https://api.thecatapi.com/v1";
-const API_KEY =
-  "live_mzte9TLRDZcXLVjdoiDBB3k0iXDzQf3rZPa5W4tEzKOkhk8WGIhfVjpin3KD1yjD";
-const LIMIT = 6;
-const SUB_ID = "my-user-1234";
+
+const baseUrl = process.env.REACT_APP_BASE_URL;
+const API_KEY = process.env.REACT_APP_API_KEY;
+const LIMIT = process.env.REACT_APP_LIMIT;
+const SUB_ID = process.env.REACT_APP_USER_ID;
 
 export default class API {
   static async getImages(page: number): Promise<Image[]> {
