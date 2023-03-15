@@ -47,7 +47,7 @@ const Upload: FC = () => {
         accept="image/*"
         isSuccessfulCall={customIsSuccess}
       >
-        <UploadButton onClick={hideErrorMessage} />
+        <UploadButton className="upload_btn" onClick={hideErrorMessage} />
         <div
           className={
             typeof status === "boolean" && !status
