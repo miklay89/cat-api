@@ -13,10 +13,10 @@ interface Props {
 
 const Post: FC<Props> = (props) => {
   const [loading, setLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(props.hasError);
   const [images, setImages] = useState<Image[]>([]);
   const [favorites, setFavorites] = useState<Favorite[]>([]);
   const [votes, setVotes] = useState<Vote[]>([]);
-  const [hasError, setHasError] = useState<boolean>(props.hasError);
 
   useEffect(() => {
     API.getImages(0)
@@ -41,9 +41,11 @@ const Post: FC<Props> = (props) => {
 
   const clickHandler = async (e: MouseEvent) => {
     e.preventDefault();
+    setLoading(true);
     API.getImages(images.length / LIMIT)
       .then((res) => setImages([...images, ...res]))
-      .catch(() => setHasError(true));
+      .catch(() => setHasError(true))
+      .finally(() => setLoading(false));
   };
 
   if (hasError) {
@@ -66,9 +68,6 @@ const Post: FC<Props> = (props) => {
   return (
     <>
       <div className="dashboard_container">
-        <div className={loading ? "show message center" : "hidden"}>
-          Loading...
-        </div>
         <div
           className={
             !loading && images.length === 0 ? "show message center" : "hidden"
@@ -77,6 +76,9 @@ const Post: FC<Props> = (props) => {
           No cats yet...
         </div>
         {items}
+      </div>
+      <div className={loading ? "show message center" : "hidden"}>
+        Loading...
       </div>
       <div className="footer">
         <button

@@ -1,7 +1,7 @@
 .message {
   font-size: 20px;
   color: gray;
-  margin: 50px;
+  margin: 20px;
 }
 
 .img_container {
@@ -41,6 +41,7 @@
   border-radius: 10px;
   padding: 3px;
   margin: 0 auto;
+  margin-bottom: 50px;
 }
 
 .footer {
