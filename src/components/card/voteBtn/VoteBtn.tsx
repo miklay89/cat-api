@@ -11,7 +11,7 @@ interface Props {
 const VoteComponent: FC<Props> = (props: Props) => {
   const [votes, setVotes] = useState<Vote[]>(props.votes);
   
-  const score = props.votes
+  const score = votes
     .filter((v) => v.image_id === props.imageId)
     .map((d) => d.value)
     .reduce((acc, next) => acc + next, 0);
